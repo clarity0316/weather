@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>weather</title>
+	<style type="text/css">
+	body{
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#back{
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		position: fixed;
+	}
+	#back img{
+		width: 100%;
+		height: 100%;
+	}
+	#city{
+		width: 100%;
+		height: 10rem;
+		text-align: center;
+		font-family: "黑体";
+	}
+	#sign{
+		width: 10%;
+		height: 6rem;
+		margin-top: 1.5rem;
+	}
+	#name{
+		font-size: 4rem;
+		color: #D1D2D6;
+		display: inline;
+	}
+	#temperature{
+		width: 100%;
+		height: 22rem;
+		background: rgba(100, 103, 191,0.4);
+		text-align: center;
+	}
+	#temp{
+		color: #D8D8DA;
+		font-size: 14rem;
+		margin: 0;
+		display: inline;
+		width: 40%;
+		font-style: italic;
+		float: left;
+		font-weight: bold;
+		margin-top: 3.5rem;
+		margin-left: 5rem;
+	}
+	#t_Right{
+		width: 50%;
+		height: 15rem;
+		display: inline;
+		float: left;
+	}
+	#t_Right p{
+		color: #D8D8DA;
+		font-size: 3em;
+		font-style: italic;
+		font-family: "黑体";
+		height: 15%;
+		font-weight: bold;
+		margin-left: 5rem;
+	}
+	#hour{
+		width: 100%;
+	}
+	#separate{
+		width: 100%;
+		height: 4rem;
+	}
+	#hour p{
+		font-size: 3rem;
+		font-family: "黑体";
+		margin: 0;
+	}
+	#sp_1{
+		float: left;
+		margin-left: 1rem;
+		color: #D8D8DA;
+	}
+	#sp_2{
+		float: right;
+		margin-right: 2rem;
+		color: #D8D8DA;
+	}
+	#sp_3{
+		margin-left:1rem;
+		float:left;
+		color: #D8D8DA;
+	}
+	#sp_Week{
+		float: right;
+		margin-right: 2rem;
+		color: #D8D8DA;
+	}
+	#hourly{
+		width: 100%;
+		padding: 0;
+		height: 15rem;
+	/*	border-spacing: 0;  取消间距空隙*/
+	}
+	#hourly tr{
+		background: rgba(100, 103, 191,0.5);
+		width: 90%;
+		text-align: center;
+		height: 4rem;
+	}
+	#hourly tr td{
+		font-size: 2rem;
+		font-family: "黑体";
+		color: #D8D8DA;
+	}
+
+	#day{
+		width: 100%;
+		height:25rem;	
+		text-align: center; 
+	}
+	#day tr{
+		background: rgba(100, 103, 191,0.5);
+	}
+	#day tr td{
+		font-size: 3rem;
+		font-family: "黑体";
+		color: #D8D8DA;
+	}
+	#day_Temp{
+		font-style: italic;
+	}
+	#detail{
+		width: 100%;
+	}
+	#detail_1{
+		color: #D8D8DA;
+		font-size:3rem;
+		float: left; 
+		margin: 1rem 0 0 1rem; 
+	}
+	#detail table{
+		width: 100%;
+		height: 20rem;
+		border-spacing: 0;
+	}
+	#wea_img{
+		height: 15rem;
+
+	}
+	#detail table tr{
+		background: rgba(100, 103, 191,0.3);
+	}
+	.detail_2{
+		font-size: 3rem;
+		font-style: italic;
+		color: #D8D8DA;
+	}
+	.detail_3{
+		font-size: 3rem;
+		font-style: italic;
+		color: #D8D8DA;
+		float: right;
+		margin-right: 2rem;
+	}
+	</style>
+</head>
+<body>
+	<div id="back">
+        	<img src="images/bg2.jpg">
+    </div>
+    <div id="city">
+	    <img src="images/sign.png" id="sign">
+	    <p id="name"></p></div>
+    <div id="temperature">
+    	<p id="temp">--</p>
+    	<div id="t_Right">
+    		<p id="today"></p>
+    		<p id="weather"></p>
+    		<p id="tempLH"></p>
+    	</div>
+    </div>
+    <div id="hour">
+    	<div id="separate">
+    		<p id="sp_1">未来六小时</p>
+    		<p id="sp_2">今天</p>
+    	</div>
+    	<table id="hourly">
+    		<tr id="hour_Six">
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr id="hour_Wea">
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr id="hour_Temp">
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    	</table>
+    	<p id="sp_3">未来四天</p>
+    	<p id="sp_Week"></p>
+    	<table id="day">
+    		<tr id="day_Daily">
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr id="day_Weather">
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr id="day_Temp">
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    	</table>
+    	</div>
+    	<div id="detail">
+    		<p id="detail_1">详细信息</p>
+    		<table>
+    			<tr>
+    				<th rowspan="4" style="width:40%;"><img id="wea_img" src="">
+    				<td class="detail_2">大气压强</td>
+    				<td id="pressure" class="detail_3"></td>
+    			</tr>
+    			<tr>
+    				<td class="detail_2">空气湿度</td>
+    				<td id="humidity" class="detail_3"></td>
+    			</tr>
+    			<tr>
+    				<td class="detail_2">风向风力</td>
+    				<td id="wind" class="detail_3"></td>
+    			</tr>
+    			<tr>
+    				<td class="detail_2">空气质量</td>
+    				<td id="quality" class="detail_3"></td>
+    			</tr>
+    		</table>
+    	</div>
+    	<div id="life">
+    		<p id="life_index">生活指数</p>
+    		<table>
+    			
+    		</table>
+    	</div>
+    <script src="jquery-3.1.0.js"></script>
+	<script src="weather_2.js"></script>
+</body>
+</html>
